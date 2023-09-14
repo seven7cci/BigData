@@ -45,7 +45,7 @@ def click_button():
 
 
 window = tk.Tk()
-window.title('numpy gui version v1.8')
+window.title('numpy gui version v1.9')
 window.geometry('300x150')
 
 # create widget
@@ -71,6 +71,8 @@ lbl_result.pack()
 en_row_column.pack(fill='x')
 # en_column.grid(row=1, column=1)
 btn_click.pack(fill='x') #E:east, W:west
+
+en_row_column.focus()
 
 # lbl_result.pack(side='right')
 # en_number.pack(side='right')
