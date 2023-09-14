@@ -19,10 +19,13 @@ print(v)
 """
 
 def click_button():
-    n = int(en_number.get())
-    l = [random.randint(1, 100) for i in range(n)]
-    v = np.array(l, dtype='int16')
-    lbl_result.config(text=v)
+    try:
+        n = int(en_number.get())
+        l = [random.randint(1, 100) for i in range(n)]
+        v = np.array(l, dtype='int16')
+        lbl_result.config(text=v)
+    except ValueError as err:
+        lbl_result.config(text=f"입력 값이 없습니다.\n{err}")
 
 
 window = tk.Tk()
