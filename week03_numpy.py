@@ -19,9 +19,12 @@ print(v)
 # print(v.ndim, v.shape, v.data, v.dtype, v.strides)
 """
 
+def press_enter_key(ev):
+    click_button()
+    messagebox.showinfo('x, y', f"({ev.x}, {ev.y})")
 
 
-def click_button(ev):
+def click_button():
     try:
         r, c = map(int, en_row_column.get().split()) # spacebar
         # r = int(en_row.get())
@@ -42,7 +45,7 @@ def click_button(ev):
 
 
 window = tk.Tk()
-window.title('numpy gui version v1.6')
+window.title('numpy gui version v1.8')
 window.geometry('300x150')
 
 # create widget
@@ -52,7 +55,8 @@ en_row_column = tk.Entry()
 btn_click = tk.Button(text="Click me", command=click_button)
 
 # Enter Key Binding With Entry Widget
-en_row_column.bind("<Return>", click_button)
+
+en_row_column.bind("<Return>", press_enter_key)
 
 # widget layout
 # lbl_result.place(x=50, y=50)
