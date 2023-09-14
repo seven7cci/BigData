@@ -1,6 +1,7 @@
 import random
 import numpy as np
 import tkinter as tk # Build in GUI
+from tkinter import messagebox # pop-up window
 
 """
 # v = np.array([1, 3, -9, 2])
@@ -25,7 +26,9 @@ def click_button():
         v = np.array(l, dtype='int16')
         lbl_result.config(text=v)
     except ValueError as err:
-        lbl_result.config(text=f"입력 값이 없습니다.\n{err}")
+        # lbl_result.config(text=f"입력 값이 없습니다.\n{err}")
+        messagebox.showerror("Error!", f"입력 값이 없습니다.\n{err}")
+        # showinfo, showwarning
 
 
 window = tk.Tk()
