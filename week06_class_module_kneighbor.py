@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import tkinter as tk
-# from sklearn.neighbors import KNeighborsRegressor
+#from sklearn.neighbors import KNeighborsRegressor
 import cilearn
 
 
@@ -26,7 +26,8 @@ def predict_life_satisfaction(*ev):
     # plt.show()
 
     # model choice
-    model = cilearn.KNeighborsRegressor(3)
+    model = cilearn.KNeighborsRegressor()  # default neighbor is 5
+    #model = KNeighborsRegressor()
 
     # model train
     model.fit(X, y)
@@ -35,7 +36,7 @@ def predict_life_satisfaction(*ev):
 
 if __name__ == "__main__":
     window = tk.Tk()
-    window.title("삶의 만족도 예측 프로그램 v0.5")
+    window.title("삶의 만족도 예측 프로그램 v0.6")
     window.geometry("600x300")
 
     lbl_life_satisfaction = tk.Label(window, text="아래 입력상자에 삶의 만족도를 알소 싶은\n국가의 1인당 GDP값을 입력해주세요")
