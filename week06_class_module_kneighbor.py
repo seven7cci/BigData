@@ -4,7 +4,7 @@ import tkinter as tk
 from sklearn.neighbors import KNeighborsRegressor
 
 
-def predict_life_satisfaction():
+def predict_life_satisfaction(*ev):
     x = int(en_GDP_per_capita.get())
     X_new = [[x]]
 
@@ -19,7 +19,6 @@ def predict_life_satisfaction():
     # print(X)
     # print(y)
 
-    print(life_satisfaction)
     # # draw scattr diagram
     # life_satisfaction.plot(kind='scatter', grid=True, x="GDP per capita (USD)", y="Life satisfaction")
     # plt.axis([23500, 62500, 4, 9])
@@ -45,5 +44,8 @@ if __name__ == "__main__":
     lbl_life_satisfaction.pack()
     en_GDP_per_capita.pack(fill='x')
     btn_predict.pack(fill='x')
+
+    en_GDP_per_capita.bind("<Return>", predict_life_satisfaction)
+    en_GDP_per_capita.focus()
 
     window.mainloop()
