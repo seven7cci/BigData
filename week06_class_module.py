@@ -3,7 +3,7 @@ import tkinter as tk
 import cilearn
 
 def predict_life_satisfaction():
-    x = int(en_GDP_per_capita.get())
+    x = int(en_GDP_per_capita.get())  # scalar input
     X_new = [[x]]
 
     # csv file download and data loading
