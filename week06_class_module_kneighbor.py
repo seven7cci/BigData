@@ -1,9 +1,11 @@
+import matplotlib.pyplot as plt
 import pandas as pd
 import tkinter as tk
-import cilearn  # custom module
+from sklearn.neighbors import KNeighborsRegressor
+
 
 def predict_life_satisfaction():
-    x = int(en_GDP_per_capita.get())  # scalar input
+    x = int(en_GDP_per_capita.get())
     X_new = [[x]]
 
     # csv file download and data loading
@@ -17,8 +19,14 @@ def predict_life_satisfaction():
     # print(X)
     # print(y)
 
+    print(life_satisfaction)
+    # # draw scattr diagram
+    # life_satisfaction.plot(kind='scatter', grid=True, x="GDP per capita (USD)", y="Life satisfaction")
+    # plt.axis([23500, 62500, 4, 9])
+    # plt.show()
+
     # model choice
-    model = cilearn.LinearRegression()
+    model = KNeighborsRegressor(n_neighbors=3)
 
     # model train
     model.fit(X, y)
@@ -27,7 +35,7 @@ def predict_life_satisfaction():
 
 if __name__ == "__main__":
     window = tk.Tk()
-    window.title("삶의 만족도 예측 프로그램 v0.1")
+    window.title("삶의 만족도 예측 프로그램 v0.3")
     window.geometry("600x300")
 
     lbl_life_satisfaction = tk.Label(window, text="아래 입력상자에 삶의 만족도를 알소 싶은\n국가의 1인당 GDP값을 입력해주세요")
