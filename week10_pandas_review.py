@@ -1,18 +1,15 @@
 import numpy as np
+from numpy.linalg import inv
+# linalg == linear algebra
 
-a = np.arange(1, 7).reshape(2, 3)
-print(a)
-
-b = np.array([
-    [5, 20],
-    [11, -1],
-    [9, 3]
+np.random.seed()
+X = np.array([
+    [1, 2, 3],
+    [1, 0, 0],
+    [0, 0, 1]
 ])
-print(b)
+print(X)
+Z = inv(X)  # 역행렬
+print(Z)
 
-print()
-
-print(a.dot(b))
-print(np.dot(a, b))
-print(b.dot(a))
-print(np.dot(b, a))
+print(X.dot(Z))  # 행렬의 역행렬의 곱은 단위행렬
