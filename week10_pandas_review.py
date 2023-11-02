@@ -1,15 +1,13 @@
 import numpy as np
-from numpy.linalg import inv
-# linalg == linear algebra
+import matplotlib.pyplot as plt
 
 np.random.seed()
-X = np.array([
-    [1, 2, 3],
-    [1, 0, 0],
-    [0, 0, 1]
-])
-print(X)
-Z = inv(X)  # 역행렬
-print(Z)
+a = np.random.uniform(size=10000)  # 균등분포(일양분포)
+# print(a)
 
-print(X.dot(Z))  # 행렬의 역행렬의 곱은 단위행렬
+b = np.random.normal(0, 1, 10000)  # 정규분포
+# print(b)
+
+# plt.hist(a)
+plt.hist(b)
+plt.show()
