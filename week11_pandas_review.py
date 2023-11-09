@@ -7,7 +7,10 @@ df1 = pd.DataFrame(
         "MAT": [100, 90, 85],
     }, index=[1, 2, 3]
 )
-# print(df1)
+print(df1)
+print(df1.sort_values('MAT'))
+df1 = df1.drop(columns=['ENG'])
+print(df1)
 
 df2 = pd.DataFrame(
     [
@@ -24,6 +27,6 @@ df2 = (
             "variable": "subject",
             "value": "score"
         }
-    ).query('score >= 90')
+    ).query('score >= 90').sort_values('score', ascending=False)
 )
 print(df2)
