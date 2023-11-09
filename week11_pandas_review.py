@@ -10,6 +10,9 @@ df = pd.DataFrame(
 )
 print(df)
 
+print(df.mean())
+print(df.max())
+
 # 국어 성적과 영어 성적이 둘 다 95점 이상인 행을 추출
 print(df.query('KOR >= 95 and ENG >= 95'))
 
