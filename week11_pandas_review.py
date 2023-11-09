@@ -9,17 +9,13 @@ df = pd.DataFrame(
     ], index=[1, 2, 3, 4], columns=["KOR", "ENG", "MAT"]
 )
 print(df)
-# df_copy = df.iloc[:, [0, 2]]
-# df_copy = df.loc[:, ['KOR', 'MAT']]
-df_copy = df.loc[:, 'KOR':'MAT':2]
-print(df_copy)
 
-df = (
-    pd.melt(df).rename(columns={
-            "variable": "subject",
-            "value": "score"
-        }
-    ).query('score >= 90').sort_values('score', ascending=False)
-)
-print(df)
-print(df.iloc[:, [1]])
+# 국어, 수학 컬럼을 추출
+# 조건은 국어 성적이 95점 이상인 경우
+df_copy = df.loc[df['KOR'] >= 95, ['KOR', 'MAT']]
+
+# 1번 학생의 수학성적(100) 출력
+print(df.at[1, 'MAT'])
+print(df.iat[0, 2])
+
+print(df_copy)
