@@ -17,3 +17,11 @@ soup = BeautifulSoup(html, 'html.parser')
 t = soup.html.head.title
 print(t)
 print(t.string)
+
+h1 = soup.html.body.h1.string
+print(h1)
+
+p1 = soup.html.body.p.string
+p2 = p1.next_sibling.sibling
+print(p1)
+print(p2)
