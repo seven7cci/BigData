@@ -20,4 +20,7 @@ print(f"여성 탑승자 : {female_count}")
 print(f"남성 생존율 : {male_survived/male_count}")
 print(f"여성 생존율 : {female_survived/female_count}")
 
-
+# 객실 등급별 생존자 수 구하기
+# pclass_survived = titanic.groupby('pclass')['survived'].sum()
+pclass_survived = titanic[titanic['survived'] == 1].groupby(['pclass']).size()
+print(pclass_survived)
