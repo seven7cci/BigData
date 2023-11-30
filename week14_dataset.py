@@ -24,3 +24,7 @@ print(f"여성 생존율 : {female_survived/female_count}")
 # pclass_survived = titanic.groupby('pclass')['survived'].sum()
 pclass_survived = titanic[titanic['survived'] == 1].groupby(['pclass']).size()
 print(pclass_survived)
+
+# 나이대별 생존자 수 구하기
+age_survived = titanic.groupby(pd.cut(titanic['age'], bins=list(range(0, 81, 10))))['survived'].sum()
+print(age_survived)
