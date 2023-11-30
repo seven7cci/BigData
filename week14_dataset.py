@@ -1,42 +1,26 @@
 import seaborn as sns
-import pandas as pd
-import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 
 titanic = sns.load_dataset('titanic')
+titanic = titanic.drop(['who', 'deck', 'embark_town', 'alive', 'class', 'adult_male', 'alone'], axis=1)
+titanic = titanic.dropna()
 
+# 수치 데이터가 아닌 피쳐를 숫자로 변환
+titanic['sex'] = titanic['sex'].map({'male': 0, 'female': 1})
+titanic['embarked'] = titanic['embarked'].map({'S': 0, 'C': 1, 'Q': 2})
 
-# 생존자 수와 사망자 수 구하기
-survived_human = titanic[titanic['survived'] == 1]['survived'].count()
-dead_human = titanic[titanic['survived'] == 0]['survived'].count()
-print(f"생존자 수 : {survived_human}")
-print(f"사망자 수 : {dead_human}")
+# 특성, 타겟 분리
+X = titanic.drop('survived', axis=1)
+y = titanic['survived']
 
-# 남성과 여성의 생존율 구하기
-male_survived = titanic[(titanic['survived'] == 1) & (titanic['sex'] == 'male')]['survived'].count()
-female_survived = titanic[(titanic['survived'] == 1) & (titanic['sex'] == 'female')]['survived'].count()
-male_count = titanic[titanic['sex'] == 'male']['sex'].count()
-female_count = titanic[titanic['sex'] == 'female']['sex'].count()
-print(f"남성 탑승자 : {male_count}")
-print(f"여성 탑승자 : {female_count}")
-print(f"남성 생존율 : {male_survived/male_count}")
-print(f"여성 생존율 : {female_survived/female_count}")
+# 훈련, 테스트셋 분리
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15, random_state=1)
 
-# 객실 등급별 생존자 수 구하기
-# pclass_survived = titanic.groupby('pclass')['survived'].sum()
-pclass_survived = titanic[titanic['survived'] == 1].groupby(['pclass']).size()
-print(pclass_survived)
+# 모델 생성
+model = LogisticRegression(solver='liblinear')  # 로지스틱 회귀 모델 적용
+model.fit(X_train, y_train)
 
-# 나이대별 생존자 수 구하기
-age_survived = titanic.groupby(pd.cut(titanic['age'], bins=list(range(0, 81, 10))))['survived'].sum()
-print(age_survived)
-
-# 생존자와 사망자의 나이 분포를 시각화
-survived_ages = titanic[titanic['survived'] == 1]['age'].dropna()
-dead_ages = titanic[titanic['survived'] == 0]['age'].dropna()
-
-plt.hist(survived_ages, bins=20, label='Survived', alpha=0.5)
-plt.hist(dead_ages, bins=20, label='Dead', alpha=0.5)
-plt.xlabel('Age')
-plt.ylabel('Count')
-plt.legend()
-plt.show()
+y_pred = model.predict(X_test)
+print(f"정확도 : {accuracy_score(y_test, y_pred)}")
